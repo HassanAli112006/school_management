@@ -113,7 +113,7 @@ def delete_student_by_roll_number(request):
 
 @require_GET
 def unpaid_fees_list(request):
-    unpaid_students = Students.objects.filter(paid=False)
+    unpaid_students = Fee_status.objects.filter(paid=False) # Used the right class later we can use django's dot notation to access data from Students
     return render(request, 'unpaid_students.html', {'unpaid_students':unpaid_students})
 
 

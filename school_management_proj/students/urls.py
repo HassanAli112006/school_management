@@ -12,6 +12,11 @@ urlpatterns = [
     path('edit_student/', views.edit_student_by_roll_number, 'edit_student_by_roll_number'),
     # List All Students
     path('student_list/', views.student_list, 'student_list'),
+    # Details of a single student
+        # By roll_number
+    path('student_details/', views.single_student_details_by_roll_number, name='single_student_details_by_roll_number'),
+        # By internal id from form
+    path('student_details/<int:pk>/', views.single_student_details, name='single_student_details'),
     # Delete All Students
         # By internal Django's id
     path('delete_students/<int:pk>/', views.delete_student, 'delete_student'),

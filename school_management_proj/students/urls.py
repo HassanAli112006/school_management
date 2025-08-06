@@ -26,9 +26,13 @@ urlpatterns = [
 
     # All unpaid students
     path('unpaid_fees_list/', views.unpaid_fees_list, name='unpaid_fees_list'),
-
     # Mark fees of a student as paid
     path('fees_paid/<int:pk>/', views.fees_paid, name='fees_paid'),
+
+    # All Paid students
+    path('paid_fees_list/', views.paid_fees_list, name='paid_fees_list'),
+    # Mark fees of a student as unpaid
+    path('fees_unpaid/<int:pk>', views.fees_unpaid, name='fees_unpaid'),
 
     # Filter student's record
         # By internal django's id

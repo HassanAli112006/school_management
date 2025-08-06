@@ -12,6 +12,7 @@ from .models import Fee_status, Students
 #   - ADD_STUDENT
 #   - EDIT_STUDENT (BY ID / ROLL_NUMBER)
 #   - STUDENT_LIST
+#   - SINGLE_STUDENT_DETAILS (BY ID / ROLL_NUMBER)
 #   - DELETE_STUDENT (BY ID / ROLL_NUMBER)
 
 @require_http_methods(["GET", "POST"])
@@ -109,6 +110,8 @@ def delete_student_by_roll_number(request):
 # -------------------------------
 #   - LIST ALL UNPAID STUDENTS
 #   - MARK FEE AS PAID
+#   - LIST ALL PAID STUDENTS
+#   - MARK FEE AS UNPAID
 #   - FEE RECORD OF A STUDENT (BY ID / ROLL_NUMBER)
 
 @require_GET
@@ -123,6 +126,19 @@ def fees_paid(request, pk):
     paid_fees_status.paid = True
     paid_fees_status.save()
     return redirect('unpaid_fees_list')
+
+
+@require_GET
+def paid_fees_list(request):
+    paid_students = Fee_status.objects.filter(paid=True) # Used the right class later we can use django's dot notation to access data from Students linked by foreign key
+    return render(request, 'paid_students.html', {'paid_students':paid_students})
+
+@require_POST
+def fees_unpaid(request, pk):
+    paid_fees_status = get_object_or_404(Fee_status, pk=pk)
+    paid_fees_status.paid = False
+    return redirect('paid_fees_list')
+
 
 
 @require_GET

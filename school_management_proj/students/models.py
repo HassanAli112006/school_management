@@ -24,3 +24,6 @@ class Fee_status(models.Model):
 
     def __str__(self):
         return f"Roll No: {self.student.roll_number} | Amount: {self.amount} | Status: {'Paid' if self.paid else 'Unpaid'}"
+    class Meta:
+        unique_together = ('student', 'month', 'year')
+

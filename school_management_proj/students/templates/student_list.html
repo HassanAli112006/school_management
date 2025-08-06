@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Student List{% endblock %}
+{% block content %}
+<h2>All Students</h2>
+<form action="{% url 'single_student_details_by_roll_number' %}" method="GET">
+    <input type="text" name="roll_number">
+    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+</form>
+<br>
+<a href="{% url 'add_student' %}" class="btn btn-success btn-sm">Add new student</a>
+<br>
+<br>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th><th>Name</th><th>Class</th><th>Roll No</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.class_name }}</td>
+            <td>{{ student.roll_number }}</td>
+            <td>
+                <a href="{% url 'single_student_details' student.id %}" class="btn btn-info btn-sm">View</a>
+                <a href="{% url 'edit_student' student.id %}" class="btn btn-warning btn-sm">Edit</a>
+                <form method="post" action="{% url 'delete_student' student.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

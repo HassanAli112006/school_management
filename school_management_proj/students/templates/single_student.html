@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Student Details{% endblock %}
+{% block content %}
+<h2>Details of <b>{{ student.name }}</b></h2>
+<ul class="list-group">
+    <li class="list-group-item"><strong>Class:</strong> {{ student.class_name }}</li>
+    <li class="list-group-item"><strong>Father's Name:</strong> {{ student.father_name }}</li>
+    <li class="list-group-item"><strong>Roll No:</strong> {{ student.roll_number }}</li>
+    <li class="list-group-item"><strong>Contact:</strong> {{ student.contact }}</li>
+    <li class="list-group-item"><strong>Fee:</strong> {{ student.fee }}</li>
+</ul>
+<br>
+<a href="{% url 'student_fee_record' student.pk %}" class="btn btn-success btn-sm">Fee History</a>
+
+{% endblock %}

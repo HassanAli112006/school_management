@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Fee History{% endblock %}
+{% block content %}
+<h2>Fee History for <b>{{student.name}}</b></h2>
+<table class="table table-striped">
+    <thead>
+        <tr><th>Month</th><th>Year</th><th>Amount</th><th>Status</th><th>Change Status</th></tr>
+    </thead>
+    <tbody>
+        {% for fee in record %}
+        <tr>
+            <td>{{ fee.month }}</td>
+            <td>{{ fee.year }}</td>
+            <td>{{ fee.amount }}</td>
+            <td>
+                {% if fee.paid %}
+                    <span class="badge bg-success">Paid</span>
+                {% else %}
+                    <span class="badge bg-danger">Unpaid</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if fee.paid %}
+                    <form method="post" action="{% url 'mark_unpaid_from_history' fee.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success btn-sm">Mark Unpaid</button>
+                </form>
+                {% else %}
+                    <form method="post" action="{% url 'mark_paid_from_history' fee.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">Mark Paid</button>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'student_list' %}" class="btn btn-primary btn-sm">Back to student list</a>
+
+{% endblock %}

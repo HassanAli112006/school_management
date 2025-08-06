@@ -22,7 +22,7 @@ def add_student(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Student added successfully.")
-            return redirect('add_student')
+            return redirect('student_list')
     form = StudentsForm()
     return render(request, 'add_student.html', {'form': form})
 
@@ -117,7 +117,7 @@ def delete_student_by_roll_number(request):
 @require_GET
 def unpaid_fees_list(request):
     unpaid_students = Fee_status.objects.filter(paid=False) # Used the right class later we can use django's dot notation to access data from Students linked by foreign key
-    return render(request, 'unpaid_students.html', {'unpaid_students':unpaid_students})
+    return render(request, 'unpaid_student.html', {'unpaid_students':unpaid_students})
 
 
 @require_POST
@@ -127,16 +127,31 @@ def fees_paid(request, pk):
     paid_fees_status.save()
     return redirect('unpaid_fees_list')
 
+@require_POST
+def mark_paid_from_history(request, pk):
+    paid_fee_status = get_object_or_404(Fee_status, pk=pk)
+    paid_fee_status.paid = True
+    paid_fee_status.save()
+    return redirect('student_fee_record', pk=paid_fee_status.student.pk)
+
+@require_POST
+def mark_unpaid_from_history(request, pk):
+    paid_fee_status = get_object_or_404(Fee_status, pk=pk)
+    paid_fee_status.paid = False
+    paid_fee_status.save()
+    return redirect('student_fee_record', pk=paid_fee_status.student.pk)
+
 
 @require_GET
 def paid_fees_list(request):
     paid_students = Fee_status.objects.filter(paid=True) # Used the right class later we can use django's dot notation to access data from Students linked by foreign key
-    return render(request, 'paid_students.html', {'paid_students':paid_students})
+    return render(request, 'paid_student.html', {'paid_students':paid_students})
 
 @require_POST
 def fees_unpaid(request, pk):
     paid_fees_status = get_object_or_404(Fee_status, pk=pk)
     paid_fees_status.paid = False
+    paid_fees_status.save()
     return redirect('paid_fees_list')
 
 
@@ -144,8 +159,9 @@ def fees_unpaid(request, pk):
 @require_GET
 def student_fee_record(request, pk):
     record = Fee_status.objects.filter(student__pk=pk)
+    student = get_object_or_404(Students, pk = pk)
     if record.exists():
-        return render(request, 'fee_history.html', {'record': record})
+        return render(request, 'fee_history.html', {'record': record, 'student':student})
     else:
         raise Http404("Student record not found.")
 

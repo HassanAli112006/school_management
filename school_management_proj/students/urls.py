@@ -40,7 +40,8 @@ urlpatterns = [
         # By roll_number from form
     path('student_fee_record/', views.student_fee_record_by_roll_number, name = 'student_fee_record_by_roll_number'),
 
-    # Mark paid/unpaid from student's history
+    # Mark paid from student's individual history
     path('mark_paid_from_history/<int:pk>/', views.mark_paid_from_history, name='mark_paid_from_history'),
+    # Mark unpaid from sutdent's individual history
     path('mark_unpaid_from_history/<int:pk>/', views.mark_unpaid_from_history, name='mark_unpaid_from_history'),
 ]

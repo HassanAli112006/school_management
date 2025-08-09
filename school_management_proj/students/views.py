@@ -6,6 +6,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import StudentsForm
 from .models import Fee_status, Students
 
+def student_home(request):
+    return render(request, 'student_home.html')
+
+
+
 # ----------------------------------------
 # STUDENT RECORD RELATED VIEWS / FUNCTIONS
 # ----------------------------------------

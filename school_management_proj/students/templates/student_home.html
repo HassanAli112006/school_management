@@ -5,6 +5,22 @@
     <title>School Management System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            background-color: #f3f3f3;
+            color: #333;
+        }
+
+        main.home-container {
+            flex: 1;  /* This will expand main to fill the space */
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -103,12 +119,12 @@
         }
 
         footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #003366;
-            color: white;
-            margin-top: 3rem;
+        text-align: center;
+        padding: 1rem;
+        background-color: #003366;
+        color: white;
         }
+
     </style>
 </head>
 <body>
@@ -116,18 +132,18 @@
     <header>
         <h1>School Management System</h1>
         <nav>
-            <ul>
+            <!-- <ul>
                 <li><a href="{% url 'student_list' %}">All Students</a></li>
                 <li><a href="{% url 'add_student' %}">Add Student</a></li>
                 <li><a href="{% url 'unpaid_fees_list' %}">Unpaid Fees</a></li>
                 <li><a href="{% url 'paid_fees_list' %}">Paid Fees</a></li>
-            </ul>
+            </ul> -->
         </nav>
     </header>
 
     <main class="home-container">
         <section class="welcome">
-            <h2>Welcome to the School Dashboard</h2>
+            <h2>Welcome to the Students' Record</h2>
             <p>Manage student records and fee tracking efficiently.</p>
         </section>
 
@@ -140,8 +156,8 @@
 
             <div class="card">
                 <h3>Fee Management</h3>
-                <a href="{% url 'unpaid_fees_list' %}" class="btn warning">Unpaid Students</a>
                 <a href="{% url 'paid_fees_list' %}" class="btn success">Paid Students</a>
+                <a href="{% url 'unpaid_fees_list' %}" class="btn warning">Unpaid Students</a>
             </div>
 
             <div class="card">

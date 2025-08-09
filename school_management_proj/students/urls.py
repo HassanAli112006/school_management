@@ -3,6 +3,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
+    path('', views.student_home, name='student_home'),
     # Add new student
     path('add_student/', views.add_student, name='add_student'),
     # Edit Student

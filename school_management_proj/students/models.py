@@ -9,7 +9,7 @@ class Students(models.Model):
     father_name = models.CharField(max_length=100)
     contact = models.CharField(max_length=100)
     roll_number = models.CharField(unique=True, max_length = 50)
-    fee = models.IntegerField(default=0)
+    fee = models.IntegerField()
 
     def __str__(self):
         return self.name

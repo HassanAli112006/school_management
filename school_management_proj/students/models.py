@@ -16,7 +16,7 @@ class Students(models.Model):
 
 class Fee_status(models.Model):
     student = models.ForeignKey(Students, on_delete= models.CASCADE)
-    amount = models.IntegerField(default=0)
+    amount = models.IntegerField()
     month = models.CharField(max_length=20)
     year = models.IntegerField()
     paid = models.BooleanField(default=False)

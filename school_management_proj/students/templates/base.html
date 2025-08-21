@@ -5,8 +5,30 @@
     <title>{% block title %}School Management System{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <div class="container mt-4">
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- Header -->
+    <header class="bg-primary text-white p-3 mb-4">
+        <div class="container">
+            <h1 style="margin-left: 40%;" class="h3">Student Record</h1>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a href="{% url 'student_home' %}" class="btn btn-outline-light btn-sm">
+                            Back to Student Page
+                        </a>
+
+                    </li>
+                    <!-- <li class="nav-item"><a href="{% url 'add_student' %}" class="nav-link text-white">Add Student</a></li>
+                    <li class="nav-item"><a href="{% url 'paid_fees_list' %}" class="nav-link text-white">Paid Fees</a></li>
+                    <li class="nav-item"><a href="{% url 'unpaid_fees_list' %}" class="nav-link text-white">Unpaid Fees</a></li> -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="container mb-4 flex-grow-1">
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">{{ message }}</div>
@@ -14,6 +36,12 @@
         {% endif %}
 
         {% block content %}{% endblock %}
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3 mt-auto">
+        <p class="mb-0">&copy; 2025 School Management System</p>
+    </footer>
+
 </body>
 </html>
